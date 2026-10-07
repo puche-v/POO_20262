@@ -1,9 +1,0 @@
-@startuml ejercicio4_primero_taller1
-class Edades {
-  - edjuan: float
-  + __init__(edjuan: float)
-  + calcular_edalber(): float
-  + calcular_edana(): float
-  + calcular_edmama(): float
-}
-@enduml
