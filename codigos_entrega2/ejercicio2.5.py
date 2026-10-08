@@ -1,22 +1,23 @@
+from enum import Enum
+class Tipocuenta:
+    AHORROS = "AHORROS"
+    CORRIENTE = "CORRIENTE"
+
 class CuentaBanco:
-    def __init__(self, nombre, apells, num, tipocuenta, saldo):
+    def __init__(self, nombre, apells, num, tipocuenta, saldo, interesapl):
         self.nombre = nombre
         self.apells = apells
         self.num = num
         self.tipocuenta = tipocuenta
         self.saldo = saldo
-
-    def tipocuenta(self):
-        if tipocuenta == 1:
-            return "Ahorros"
-        elif tipocuenta == 2:
-            return "Corriente"
+        self.interesapl = interesapl
 
     def cuenta(self):
         print(f"Titular: {self.nombre} {self.apells}")
         print(f"Numero de cuenta: {self.num}")
         print(f"Tipo de cuenta: {self.tipocuenta}")
         print(f"Saldo: {self.saldo}")
+        print(f"La tasa de interes aplicado es del {self.interesapl}")
     
     def consignar(self, consignacion):
         self.consignacion = consignacion
@@ -33,8 +34,12 @@ class CuentaBanco:
         else: 
             self.saldo = self.saldo - monto
             print(f"Retiro exitoso, se han retirado {monto} pesos")
+    def saldointeres(self):
+        nuevosaldo = self.saldo - (self.saldo*self.interesapl)
+        print(f"El saldo con el interes aplicado es: {nuevosaldo}")
+        self.saldo = nuevosaldo
 
-Cuenta1 = CuentaBanco("Juanito", "Diez Miranda", 4040222167, 1, 0)
+Cuenta1 = CuentaBanco("Juanito", "Diez Miranda", 4040222167, Tipocuenta.AHORROS, 0, 0.12)
 x = 0
 while x != 5:
     x = int(input("""Seleccione la operación a realizar:
@@ -50,7 +55,7 @@ while x != 5:
     elif x == 2:
         consignacion = int(input("Ingrese la cantidad a consignar: "))
         Cuenta1.consignar(consignacion)
-        
+        Cuenta1.saldointeres()
     elif x == 3:
         monto = int(input("Ingrese el monto a retirar: "))
         Cuenta1.retirar(monto)
@@ -69,11 +74,11 @@ while x != 5:
             Cuenta1.apells = input("Ingrese los nuevos apellidos: ")
             
         elif y == 3:
-            Cuenta1.tipocuenta = int(input("""Ingrese el nuevo tipo de cuenta
-            1- Ahorros
-            2- Corriente
+            Cuenta1.tipocuenta = input("""Ingrese el nuevo tipo de cuenta
+            1- AHORROS
+            2- CORRIENTE
 
-            """))
+            """)
             
     elif x == 5:
         break
